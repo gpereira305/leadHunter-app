@@ -1,0 +1,162 @@
+html,
+body {
+  box-sizing: border-box;
+}
+
+ul,
+li {
+  list-style: none;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  padding: 0;
+  margin: 0;
+}
+
+.leads-container {
+  padding: 0 10%;
+  margin: auto;
+  margin-top: 5%;
+}
+
+/*-----------  search inputs -----------*/
+.lead-loading {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+}
+
+.lead-inputs {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.lead-inputs__search {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 425px;
+}
+
+.lead-inputs__search input {
+  outline: none;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+}
+
+.lead-inputs__search input:focus {
+  outline: 2px solid rgb(0, 15, 83);
+}
+
+.lead-inputs__select {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 350px;
+}
+
+.lead-inputs__select--options {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.lead-inputs__select--options select {
+  width: 100%;
+  outline: none;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.lead-inputs__select--options button {
+  padding: 5px 20px;
+  border: 1px solid #ccc;
+  margin-left: 5px;
+}
+
+/*---------- leads grid ----------*/
+.leads-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+.leads-grid li {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 20px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+/*---------- HERO COMPONENT ----------*/
+
+.leads-hero img {
+  width: 100%;
+}
+
+/**
+ * ----------------------------------------
+ * animation fade-in
+ * ----------------------------------------
+ */
+.fade-in {
+  -webkit-animation: fade-in 1.2s ease-in-out both;
+  animation: fade-in 1.2s ease-in-out both;
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/**
+ * ----------------------------------------
+ *           MEDIA QUERY
+ * ----------------------------------------
+ */
+@media (max-width: 1070px) {
+  .leads-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 990px) {
+  .lead-inputs {
+    flex-direction: column;
+  }
+
+  .lead-inputs__select {
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 670px) {
+  .leads-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
