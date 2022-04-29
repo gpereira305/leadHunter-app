@@ -1,15 +1,13 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import LeadCard from "./LeadCard";
 
-const AllLeads = () => {
+const LeadItems = () => {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [leads, setLeads] = useState([]);
   const [query, setQuery] = useState("");
   const [searchParam] = useState(["name"]);
   const [filterParam, setFilterParam] = useState(["AllLeads"]);
-
-  // const selectInputRef = useRef();
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -30,7 +28,7 @@ const AllLeads = () => {
   // e ao selecionar pela empresa
   function search(leads) {
     return leads.filter((item) => {
-      if (item.company.name === filterParam) {
+      if (item.company.bs === filterParam) {
         return searchParam.some(
           (newItem) =>
             item[newItem]
@@ -56,25 +54,25 @@ const AllLeads = () => {
     setFilterParam(["AllLeads"]);
   }
 
-  console.log(search(leads).length);
-
   return (
     <>
       {error && (
-        <div className="lead-loading">
-          <h3>Ocorreu um erro ao buscar dados</h3>
+        <div className="lead-nothing">
+          <h4>Ocorreu um erro ao buscar dados</h4>
         </div>
       )}
       {!isLoaded ? (
-        <div className="lead-loading">
-          <h3>Carregando...</h3>
+        <div className="lead-nothing" style={{ flexDirection: "column" }}>
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <h4>Carregando...</h4>
         </div>
       ) : (
-        // -------- container ---------- //
-        <div className="leads-container">
+        <main className="leads-container">
           <div className="lead-inputs">
             <div className="lead-inputs__search">
-              <label>Pesquisar pelo nome do lead</label>
+              <label>Pesquisar pelo nome do cliente</label>
               <input
                 type="search"
                 name="search-form"
@@ -85,19 +83,19 @@ const AllLeads = () => {
               />
             </div>
 
-            {/*------------- Select ----------*/}
             <div className="lead-inputs__select">
-              <label>Pesquisar pela empresa</label>
+              <label>Filtrar por categorias</label>
               <div className="lead-inputs__select--options">
                 <select
+                  class="form-select"
                   onChange={(e) => {
                     setFilterParam(e.target.value);
                   }}
                   aria-label="Filtrar por nome da empresa"
                 >
-                  {leads.map((item) => (
-                    <option value={item.value} key={item.id}>
-                      {item.company.name}
+                  {leads.map((item, i) => (
+                    <option value={item.value} key={i}>
+                      {item.company.bs}
                     </option>
                   ))}
                 </select>
@@ -109,15 +107,24 @@ const AllLeads = () => {
               </div>
             </div>
           </div>
-          <ul className="leads-grid">
-            {search(leads).map((item) => (
-              <LeadCard item={item} key={item.id} />
-            ))}
-          </ul>
-        </div>
+
+          <section>
+            {search(leads).length !== 0 ? (
+              <ul className="leads-grid">
+                {search(leads).map((item) => (
+                  <LeadCard item={item} key={item.id} />
+                ))}
+              </ul>
+            ) : (
+              <div className="lead-nothing">
+                <h4>Nenhum resultado encontrado</h4>
+              </div>
+            )}
+          </section>
+        </main>
       )}
     </>
   );
 };
 
-export default AllLeads;
+export default LeadItems;

@@ -3,11 +3,11 @@ import meetingRoom from "../assets/meeting.jpg";
 
 const LeadHero = () => {
   return (
-    <div className="leads-hero">
-      <div>
-        <img src={meetingRoom} alt="" />
+    <section className="leads-hero">
+      <div className="leads-hero__wrapper">
+        <img src={meetingRoom} alt="hero banner" title="hero" />
       </div>
-    </div>
+    </section>
   );
 };
 

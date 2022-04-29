@@ -1,59 +1,47 @@
 import React from "react";
+import leadImg from "../assets/user-lead.png";
 
 const LeadCard = ({ item }) => {
   return (
-    <li className="fade-in">
-      <h3>{item.name}</h3>
-      <div>
-        {/* <img src={leadImages} alt="" key={item.id} width="100px" /> */}
-        <h6>
-          Usuário: <small>"{item.username}"</small>
-        </h6>
-      </div>
-      <div>
-        <h6>
-          Email: <small>{item.email}</small>
-        </h6>
-        <h6>
-          Tel: <small>{item.phone.slice(0, 13)}</small>
-        </h6>
-      </div>
-      <hr />
+    <li className="card lead-card fade-in">
+      <div className="d-flex align-items-center lead-card__block">
+        <img
+          src={leadImg}
+          className="lead-card__img"
+          alt={item.name}
+          title={item.name}
+        />
 
-      {/* enderço */}
-      <div>
-        <h4>Endereço</h4>
-        <div>
+        <div className="card-text lead-card__info">
+          <h5>{item.name}</h5>
           <h6>
-            Cidade: <small>{item.address.city}</small>
+            Nome de usuário: <small>"{item.username}"</small>
           </h6>
           <h6>
-            Rua:{" "}
+            Email: <small>{item.email}</small>
+          </h6>
+          <h6>
+            Tel: <small>{item.phone.slice(0, 13)}</small>
+          </h6>
+          <h6>
+            Endereço:{" "}
             <small>
-              {item.address.street} - {item.address.suite}
+              {item.address.city}, {item.address.street} - {item.address.suite}{" "}
+              / CEP: {item.address.zipcode}
             </small>
           </h6>
-          <h6>
-            CEP: <small>{item.address.zipcode}</small>
-          </h6>
         </div>
       </div>
       <hr />
 
-      {/* companhia */}
-      <div>
-        <h4>Companhia</h4>
-        <div>
-          <h6>
-            Nome: <small>{item.company.name}</small>
-          </h6>
-          <h6>
-            Lema da empresa: <small>"{item.company.catchPhrase}"</small>
-          </h6>
-          <h6>
-            Serviços <small>{item.company.bs}</small>
-          </h6>
-        </div>
+      <div className="card-text lead-card__info">
+        <h5>{item.company.name}</h5>
+        <h6>
+          Nossos serviços <small>{item.company.bs.split(" ").join(", ")}</small>
+        </h6>
+        <h6 className="lead-card__info--text">
+          Lema da empresa: <small>"{item.company.catchPhrase}"</small>
+        </h6>
       </div>
     </li>
   );
